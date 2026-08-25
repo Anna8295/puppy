@@ -1,0 +1,43 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  background-color: #c9ad86;
+  color: #1b120b;
+  font-family: "IBM Plex Sans", ui-sans-serif, system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  touch-action: pan-y;
+  overflow-x: hidden;
+}
+
+.scrub-hint-mouse {
+  display: inline;
+}
+
+.scrub-hint-touch {
+  display: none;
+}
+
+@media (pointer: coarse) {
+  .scrub-hint-mouse {
+    display: none;
+  }
+
+  .scrub-hint-touch {
+    display: inline;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
