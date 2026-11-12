@@ -34,6 +34,14 @@ export default function App() {
   const mainRef = usePinAtBottom<HTMLElement>();
   const shadeRef = useFooterShade();
 
+  // Arriving from another page with #rail or #notify: the browser looks for the
+  // target before React has rendered it, so jump there once it exists.
+  useEffect(() => {
+    const hash = window.location.hash;
+    const target = hash ? document.getElementById(hash.slice(1)) : null;
+    target?.scrollIntoView({ behavior: "instant" as ScrollBehavior });
+  }, []);
+
   return (
     <div className="relative min-h-screen">
       <div aria-hidden className="fixed inset-0 bg-gradient-to-b from-sand-700 via-sand-500 to-sand-300" />

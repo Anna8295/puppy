@@ -1,3 +1,5 @@
+const HOME = import.meta.env.BASE_URL;
+
 const LINK =
   "transition-colors hover:text-caramel-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-caramel-300";
 
@@ -24,12 +26,12 @@ export default function Footer() {
           <nav aria-label="Footer" className="font-mono text-xs uppercase tracking-[0.2em] text-bone-300">
             <ul className="flex flex-wrap gap-x-8 gap-y-4">
               <li>
-                <a href="#rail" className={LINK}>
+                <a href={`${HOME}#rail`} className={LINK}>
                   The rail
                 </a>
               </li>
               <li>
-                <a href="#notify" className={LINK}>
+                <a href={`${HOME}#notify`} className={LINK}>
                   Get notified
                 </a>
               </li>
@@ -54,7 +56,10 @@ export default function Footer() {
         <div className="mt-6 flex flex-col gap-3 font-mono text-[11px] uppercase tracking-[0.18em] text-bone-300/60 sm:flex-row sm:justify-between">
           <p>© {new Date().getFullYear()} Cord &amp; Coat · a portfolio project, not a real shop</p>
           <p>
-            Made with React &amp; a very good puppy ·{" "}
+            <a href={`${HOME}privacy.html`} className={LINK}>
+              Privacy
+            </a>{" "}
+            · Made with React &amp; a very good puppy ·{" "}
             <a href="https://github.com/Anna8295/puppy" target="_blank" rel="noopener noreferrer" className={LINK}>
               Source
             </a>

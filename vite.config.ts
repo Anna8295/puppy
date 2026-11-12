@@ -31,4 +31,9 @@ function contentSecurityPolicy(): Plugin {
 export default defineConfig({
   base: "/puppy/",
   plugins: [react(), contentSecurityPolicy()],
+  build: {
+    rollupOptions: {
+      input: { main: "index.html", privacy: "privacy.html" },
+    },
+  },
 });
