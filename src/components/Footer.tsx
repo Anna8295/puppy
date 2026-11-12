@@ -8,7 +8,7 @@ function scrollToTop(event: React.MouseEvent) {
 
 export default function Footer() {
   return (
-    <footer className="relative z-10 -mt-8 overflow-hidden rounded-t-[2rem] bg-coffee-950 text-bone-100 md:-mt-12 md:rounded-t-[3rem]">
+    <footer className="relative z-10 -mt-8 overflow-hidden rounded-t-[2rem] bg-coffee-950 shadow-[0_-30px_60px_-30px_rgba(27,18,11,0.5)] text-bone-100 md:-mt-12 md:rounded-t-[3rem]">
       <div className="mx-auto max-w-6xl px-5 pb-10 pt-16 sm:px-8 md:px-10 md:pt-20">
         <div className="flex flex-col gap-12 md:flex-row md:items-end md:justify-between">
           <div className="max-w-sm">
