@@ -22,6 +22,27 @@ body {
   overflow-x: hidden;
 }
 
+.dialog-pop[open] {
+  animation: dialog-pop 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.dialog-pop[open]::backdrop {
+  animation: dialog-fade 0.3s ease-out;
+}
+
+@keyframes dialog-pop {
+  from {
+    opacity: 0;
+    transform: translateY(16px) scale(0.96);
+  }
+}
+
+@keyframes dialog-fade {
+  from {
+    opacity: 0;
+  }
+}
+
 .scrub-hint-mouse {
   display: inline;
 }

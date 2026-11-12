@@ -1,8 +1,9 @@
 import { useState, type FormEvent } from "react";
+import NotifyDialog from "./NotifyDialog";
 
 export default function Hero() {
   const [email, setEmail] = useState("");
-  const [submitted, setSubmitted] = useState(false);
+  const [dialogOpen, setDialogOpen] = useState(false);
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -13,9 +14,9 @@ export default function Hero() {
       input.reportValidity();
       return;
     }
-    // Note: nothing is sent anywhere yet — connect a mailing-list service before launch.
-    setEmail(value);
-    setSubmitted(true);
+    // Portfolio project: nothing is sent or stored. Clear the field and explain why.
+    setEmail("");
+    setDialogOpen(true);
   };
 
   return (
@@ -60,18 +61,17 @@ export default function Hero() {
               value={email}
               onChange={(event) => setEmail(event.target.value)}
               placeholder="your email"
-              disabled={submitted}
               className="min-w-0 flex-1 border-b border-clay-600/60 bg-transparent py-1.5 font-body text-sm text-coffee-950 placeholder:text-coffee-800/50 transition-colors focus-visible:border-caramel-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-caramel-600 disabled:opacity-60 sm:py-2 sm:text-base xl:py-2 xl:text-base"
             />
             <button
               type="submit"
-              disabled={submitted}
-              className="shrink-0 bg-caramel-500 px-4 py-1.5 font-mono text-xs uppercase tracking-[0.15em] text-sand-100 transition-colors hover:bg-caramel-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-coffee-950 disabled:opacity-70 sm:px-5 sm:py-2 sm:text-sm xl:px-6 xl:py-2 xl:text-sm"
+              className="shrink-0 bg-caramel-500 px-4 py-1.5 font-mono text-xs uppercase tracking-[0.15em] text-sand-100 transition-colors hover:bg-caramel-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-coffee-950 sm:px-5 sm:py-2 sm:text-sm xl:px-6 xl:py-2 xl:text-sm"
             >
-              {submitted ? "Noted" : "Notify me"}
+              Notify me
             </button>
           </div>
         </form>
+        <NotifyDialog open={dialogOpen} onClose={() => setDialogOpen(false)} />
       </div>
     </section>
   );
