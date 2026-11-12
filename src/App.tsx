@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useState } from "react";
+import Footer from "./components/Footer";
 import GrainOverlay from "./components/GrainOverlay";
 import Header from "./components/Header";
 import Hero from "./components/Hero";
@@ -38,6 +39,7 @@ export default function App() {
         <Hero />
         <Rack />
       </main>
+      <Footer />
       <ScrubHint visible={!hasScrubbed && !scrolled} />
       <GrainOverlay />
     </div>

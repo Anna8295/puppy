@@ -14,7 +14,7 @@ export default function PetFrames({ imgRef }: PetFramesProps) {
         alt="A brown curly-haired puppy wearing a gold chain collar"
         width={720}
         height={1280}
-        fetchPriority="high"
+        {...{ fetchpriority: "high" }}
         className="h-full w-full scale-150 object-cover object-[50%_12%] md:w-auto md:scale-100 xl:drop-shadow-[0_30px_40px_rgba(27,18,11,0.28)]"
       />
     </div>
