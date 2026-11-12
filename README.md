@@ -30,4 +30,4 @@ Source frames exported from Figma live in `wardrobe-source/<piece>/1.png … N.p
 - Static site, no backend, no secrets. Fonts are bundled (no Google Fonts request).
 - A Content-Security-Policy is added as a `<meta>` tag at build time (`vite.config.ts`).
 - GitHub Pages can't send custom headers, so `frame-ancestors`, `X-Content-Type-Options` and `Permissions-Policy` aren't set. HSTS is sent by GitHub Pages itself. To get the full set, put the site behind a host or proxy that allows headers (e.g. Cloudflare, Netlify).
-- The "Notify me" form doesn't send data anywhere yet. Before connecting it to a mailing-list service, add a privacy policy and a consent line under the form.
+- This is a portfolio project: the "Notify me" form never sends or stores anything. Submitting it clears the field and opens a dialog explaining that no email will arrive. If it's ever connected to a real mailing-list service, add a privacy policy and a consent line under the form first.
