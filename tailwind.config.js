@@ -34,7 +34,7 @@ export default {
         },
       },
       fontFamily: {
-        display: ["Fraunces", "ui-serif", "Georgia", "serif"],
+        display: ["'Fraunces Variable'", "Fraunces", "ui-serif", "Georgia", "serif"],
         body: ["'IBM Plex Sans'", "ui-sans-serif", "system-ui", "sans-serif"],
         mono: ["'IBM Plex Mono'", "ui-monospace", "SFMono-Regular", "monospace"],
       },
