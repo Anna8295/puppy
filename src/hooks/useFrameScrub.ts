@@ -20,11 +20,20 @@ export function useFrameScrub(frameUrls: string[], onScrub?: () => void) {
   const rafRef = useRef<number | null>(null);
   const pendingIndexRef = useRef<number | null>(null);
 
+  // Fetch the other frames only after the page has loaded, so they don't
+  // compete with the first frame (the largest thing on screen).
   useEffect(() => {
-    frameUrls.forEach((url) => {
-      const preload = new Image();
-      preload.src = url;
-    });
+    const preloadAll = () =>
+      frameUrls.forEach((url) => {
+        const preload = new Image();
+        preload.src = url;
+      });
+    if (document.readyState === "complete") {
+      preloadAll();
+      return;
+    }
+    window.addEventListener("load", preloadAll, { once: true });
+    return () => window.removeEventListener("load", preloadAll);
   }, [frameUrls]);
 
   useEffect(() => {
