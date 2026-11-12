@@ -18,15 +18,15 @@ export default function Hero() {
             <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-caramel-500 opacity-60" />
             <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-caramel-600" />
           </span>
-          Opening Autumn 2026
+          Opening Winter 2026
         </p>
 
-        <h1 className="mt-3 max-w-sm bg-gradient-to-br from-ink-950 via-coffee-900 to-coffee-700 bg-clip-text text-[clamp(1.875rem,1.1rem+3.6vw,4.5rem)] font-display font-medium leading-[1.05] tracking-tight text-transparent sm:mt-4 md:mt-5 xl:mt-6 xl:max-w-none xl:text-[clamp(3.5rem,2rem+3vw,6.5rem)]">
-          Considered gear for dogs with <em className="font-display italic text-caramel-600">character</em>.
+        <h1 className="mt-3 max-w-sm text-[clamp(1.875rem,1.1rem+3.6vw,4.5rem)] font-display font-medium leading-[1.05] tracking-tight text-coffee-950 sm:mt-4 md:mt-5 xl:mt-6 xl:max-w-none xl:text-[clamp(3.5rem,2rem+3vw,6.5rem)]">
+          Dressed for every <em className="font-display italic">walk</em>.
         </h1>
 
         <p className="mt-3 max-w-md font-body text-sm leading-relaxed text-coffee-700 sm:mt-4 sm:text-base md:mt-5 md:text-lg xl:mt-6 xl:max-w-lg xl:text-xl">
-          Leashes, bowls, and coats — cut well and built to last. Cord &amp; Coat is a small shop, opening this autumn.
+          Cable knits, teddy fleece and a proper raincoat for dogs with character. Our first rail is almost ready.
         </p>
 
         <form
