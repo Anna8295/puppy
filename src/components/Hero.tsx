@@ -21,7 +21,7 @@ export default function Hero() {
 
   return (
     <section className="relative z-10 min-h-[100svh] max-md:sticky max-md:top-0 md:flex md:items-center md:pl-[4vw] xl:pl-[6vw]">
-      <div className="absolute inset-x-0 top-[55vh] bottom-0 [@media(max-height:700px)]:top-[47vh] flex flex-col overflow-y-auto rounded-t-[2rem] bg-bone-100/40 p-6 shadow-[0_20px_50px_-20px_rgba(27,18,11,0.45)] ring-1 ring-coffee-950/5 backdrop-blur-xl sm:p-7 md:static md:inset-auto md:block md:max-w-lg md:overflow-visible md:rounded-2xl xl:max-w-2xl xl:rounded-none xl:bg-transparent xl:p-0 xl:shadow-none xl:ring-0 xl:backdrop-blur-none">
+      <div className="absolute inset-x-0 top-[55vh] bottom-0 [@media(max-height:700px)]:top-[44vh] flex flex-col overflow-y-auto rounded-t-[2rem] bg-bone-100/40 p-6 shadow-[0_20px_50px_-20px_rgba(27,18,11,0.45)] ring-1 ring-coffee-950/5 backdrop-blur-xl sm:p-7 md:static md:inset-auto md:block md:max-w-lg md:overflow-visible md:rounded-2xl xl:max-w-2xl xl:rounded-none xl:bg-transparent xl:p-0 xl:shadow-none xl:ring-0 xl:backdrop-blur-none">
         <p className="flex items-center gap-2 font-mono text-xs uppercase tracking-[0.2em] text-caramel-600 sm:text-sm xl:text-sm">
           <span className="relative flex h-2.5 w-2.5">
             <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-caramel-500 opacity-60" />
@@ -34,7 +34,7 @@ export default function Hero() {
           Dressed for every <em className="font-display italic">walk</em>.
         </h1>
 
-        <p className="mb-8 mt-3 max-w-md font-body md:mb-0 text-base leading-relaxed text-coffee-700 sm:mt-4 sm:text-lg md:mt-5 md:text-lg xl:mt-6 xl:max-w-lg xl:text-xl">
+        <p className="mb-6 mt-3 max-w-md font-body md:mb-0 text-base leading-relaxed text-coffee-700 sm:mt-4 sm:text-lg md:mt-5 md:text-lg xl:mt-6 xl:max-w-lg xl:text-xl">
           Cable knits, teddy fleece and a proper raincoat for dogs with character. Our first rail is almost ready.
         </p>
 
@@ -70,6 +70,15 @@ export default function Hero() {
               Notify me
             </button>
           </div>
+          <p className="mt-2 font-body text-xs text-coffee-800/70 xl:mt-3">
+            Demo only: nothing is sent or stored.{" "}
+            <a
+              href={`${import.meta.env.BASE_URL}privacy.html`}
+              className="underline decoration-coffee-800/30 underline-offset-2 transition-colors hover:text-caramel-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-caramel-600"
+            >
+              Privacy
+            </a>
+          </p>
         </form>
         <NotifyDialog open={dialogOpen} onClose={() => setDialogOpen(false)} />
       </div>
