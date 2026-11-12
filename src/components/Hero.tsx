@@ -6,7 +6,15 @@ export default function Hero() {
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    if (!email) return;
+    const input = event.currentTarget.elements.namedItem("email") as HTMLInputElement;
+    const value = email.trim();
+    input.value = value;
+    if (!value || !input.checkValidity()) {
+      input.reportValidity();
+      return;
+    }
+    // Note: nothing is sent anywhere yet — connect a mailing-list service before launch.
+    setEmail(value);
     setSubmitted(true);
   };
 
@@ -43,8 +51,12 @@ export default function Hero() {
           <div className="mt-3 flex items-stretch gap-3 xl:mt-4 xl:gap-4">
             <input
               id="notify-email"
+              name="email"
               type="email"
               required
+              maxLength={254}
+              autoComplete="email"
+              spellCheck={false}
               value={email}
               onChange={(event) => setEmail(event.target.value)}
               placeholder="your email"
