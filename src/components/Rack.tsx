@@ -62,7 +62,7 @@ function Hanger({ garment, index, open, slot, preload, swingRef, onHover, onTogg
       <button
         type="button"
         aria-pressed={open}
-        aria-label={`${garment.name} in ${garment.colour}`}
+        aria-label={`Turn the ${garment.name} in ${garment.colour}`}
         className="absolute inset-0 z-20 cursor-pointer rounded-lg outline-none focus-visible:ring-2 focus-visible:ring-caramel-600 focus-visible:ring-offset-4 focus-visible:ring-offset-bone-100"
         onPointerEnter={(event) => {
           pointerType.current = event.pointerType;
@@ -93,7 +93,7 @@ function Hanger({ garment, index, open, slot, preload, swingRef, onHover, onTogg
           <img
             ref={imgRef}
             src={frameUrls[0]}
-            alt=""
+            alt={`${garment.name} for dogs in ${garment.colour}, hanging on a rail`}
             width={480}
             height={640}
             loading="lazy"
