@@ -32,7 +32,7 @@ export default function Header({ solid }: HeaderProps) {
           href="#notify"
           className="font-mono text-xs uppercase tracking-[0.2em] text-coffee-800 transition-colors hover:text-caramel-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-caramel-600"
         >
-          Get notified
+          Get 15% off
         </a>
       </nav>
     </header>

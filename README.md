@@ -6,6 +6,7 @@
 
 ## What's on the page
 
+- **Offer pop-up:** a small "15% off your first order" card that slides in at the bottom corner once you scroll down to the rail (never over the hero, which has its own email form). It hides again if you scroll back up, stays closed once closed, and doesn't appear if you already signed up in the hero. The offer is pretend, like the shop.
 - **Hero:** a dog image sequence you can scrub through. On desktop, move your cursor to make the puppy look around. On a phone, it blinks on its own.
 - **The first rail:** five garments hanging on a clothes rail. Hover over one (or tap it) to turn it to the front while the others slide aside like curtains.
 - **Footer:** links, a privacy link and a note that this is a portfolio project.
@@ -45,7 +46,7 @@ Source frames exported from Figma live in `wardrobe-source/<piece>/1.png … N.p
 
 - Static site, no backend, no secrets.
 - No cookies, analytics or third-party services. Fonts are bundled with the site, so there's no Google Fonts request.
-- The "Notify me" form never sends or stores anything. A note under it says so. Submitting clears the field and opens a dialog explaining that no email will arrive. If it's ever connected to a real mailing-list service, update the privacy page and add a consent line under the form first.
+- The "Notify me" form never sends or stores anything, and there is no real discount code. A note under it says so. Submitting clears the field and opens a dialog explaining that no email or code will arrive. If it's ever connected to a real mailing-list service, update the privacy page and add a consent line under the form first.
 - The site is hosted on GitHub Pages, which logs visitors' IP addresses. The privacy page says this.
 - A Content-Security-Policy is added as a `<meta>` tag at build time (`vite.config.ts`) on both pages.
 - GitHub Pages can't send custom headers, so `frame-ancestors`, `X-Content-Type-Options` and `Permissions-Policy` aren't set. HSTS is sent by GitHub Pages itself. To get the full set, put the site behind a host or proxy that allows headers (e.g. Cloudflare, Netlify).

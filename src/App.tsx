@@ -3,6 +3,7 @@ import Footer from "./components/Footer";
 import GrainOverlay from "./components/GrainOverlay";
 import Header from "./components/Header";
 import Hero from "./components/Hero";
+import OfferPopup from "./components/OfferPopup";
 import PetFrames from "./components/PetFrames";
 import Rack from "./components/Rack";
 import ScrubHint from "./components/ScrubHint";
@@ -28,6 +29,8 @@ function useScrolledPast(fraction: number) {
 
 export default function App() {
   const [hasScrubbed, setHasScrubbed] = useState(false);
+  const [signedUp, setSignedUp] = useState(false);
+  const handleSignedUp = useCallback(() => setSignedUp(true), []);
   const handleScrub = useCallback(() => setHasScrubbed(true), []);
   const imgRef = useFrameScrub(PET_FRAME_URLS, handleScrub);
   const scrolled = useScrolledPast(0.4);
@@ -50,7 +53,7 @@ export default function App() {
       {/* Phones: the hero stays put while the rail slides over it, then the rail
           stays put (pinned at its bottom edge) while the footer slides over it. */}
       <main ref={mainRef} className="max-md:sticky">
-        <Hero />
+        <Hero onSignedUp={handleSignedUp} />
         <Rack />
         <div
           ref={shadeRef}
@@ -59,6 +62,7 @@ export default function App() {
         />
       </main>
       <Footer />
+      <OfferPopup signedUp={signedUp} onSignedUp={handleSignedUp} />
       <ScrubHint visible={!hasScrubbed && !scrolled} />
       <GrainOverlay />
     </div>

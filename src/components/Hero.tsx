@@ -1,7 +1,11 @@
 import { useState, type FormEvent } from "react";
 import NotifyDialog from "./NotifyDialog";
 
-export default function Hero() {
+interface HeroProps {
+  onSignedUp: () => void;
+}
+
+export default function Hero({ onSignedUp }: HeroProps) {
   const [email, setEmail] = useState("");
   const [dialogOpen, setDialogOpen] = useState(false);
 
@@ -16,6 +20,7 @@ export default function Hero() {
     }
     // Portfolio project: nothing is sent or stored. Clear the field and explain why.
     setEmail("");
+    onSignedUp();
     setDialogOpen(true);
   };
 
@@ -47,7 +52,7 @@ export default function Hero() {
             htmlFor="notify-email"
             className="block font-mono text-xs uppercase tracking-[0.2em] text-coffee-800 xl:text-xs"
           >
-            Get the opening notice
+            Join the list for 15% off
           </label>
           <div className="mt-3 flex items-stretch gap-3 xl:mt-4 xl:gap-4">
             <input
@@ -71,7 +76,7 @@ export default function Hero() {
             </button>
           </div>
           <p className="mt-2 font-body text-xs text-coffee-800/70 xl:mt-3">
-            Demo only: nothing is sent or stored.{" "}
+            Demo only: nothing is sent or stored, and there’s no real code.{" "}
             <a
               href={`${import.meta.env.BASE_URL}privacy.html`}
               className="underline decoration-coffee-800/30 underline-offset-2 transition-colors hover:text-caramel-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-caramel-600"

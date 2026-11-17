@@ -32,7 +32,7 @@ export default function Footer() {
               </li>
               <li>
                 <a href={`${HOME}#notify`} className={LINK}>
-                  Get notified
+                  Get 15% off
                 </a>
               </li>
               <li>

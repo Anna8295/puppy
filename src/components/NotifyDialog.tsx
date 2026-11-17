@@ -51,7 +51,10 @@ export default function NotifyDialog({ open, onClose }: NotifyDialogProps) {
             Cord &amp; Coat is a pretend shop — a portfolio project made for fun. There’s no mailing list, so nothing
             will ever land in your inbox.
           </p>
-          <p>We didn’t keep your address either. The jumpers are still nice to look at, though.</p>
+          <p>
+            That means no 15% code either, sorry. We didn’t keep your address, but the jumpers are still nice to look
+            at.
+          </p>
         </div>
 
         <div className="mt-6 flex flex-col-reverse gap-3 sm:flex-row sm:justify-center">

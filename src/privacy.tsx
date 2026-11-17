@@ -62,9 +62,9 @@ function PrivacyPage() {
 
         <Section title="The email field">
           <p>
-            The “Get the opening notice” form is a demo. When you press “Notify me”, the address is checked in your
-            browser, cleared, and a message explains that no email will ever be sent. The address is never sent to a
-            server and never stored.
+            The “Join the list” form, the 15% offer pop-up and its form are a demo. When you submit either form, the address is
+            checked in your browser, cleared, and a message explains that no email or discount code will ever be sent.
+            The address is never sent to a server and never stored.
           </p>
         </Section>
 
