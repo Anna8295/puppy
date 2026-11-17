@@ -1,8 +1,9 @@
-name: Deploy to GitHub Pages
+name: Test and deploy
 
 on:
   push:
     branches: [main]
+  pull_request:
   workflow_dispatch:
 
 permissions:
@@ -11,11 +12,40 @@ permissions:
   id-token: write
 
 concurrency:
-  group: pages
+  group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
 
 jobs:
+  # Every push and pull request runs the full test suite. The site is only
+  # built and deployed from main, and only if every test passed.
+  test:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+      - run: npm ci
+      - name: Unit and component tests (Vitest)
+        run: npm run test:coverage
+      - name: Install the browser for end-to-end tests
+        run: npx playwright install --with-deps chromium
+      - name: End-to-end and accessibility tests (Playwright)
+        run: npm run test:e2e
+      - name: Upload the Playwright report
+        if: ${{ !cancelled() }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: playwright-report
+          path: playwright-report/
+          retention-days: 14
+
   build:
+    needs: test
+    if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4

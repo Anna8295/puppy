@@ -4,3 +4,9 @@ dist-ssr
 *.local
 *.tsbuildinfo
 .DS_Store
+
+# test output
+coverage
+playwright-report
+test-results
+blob-report
