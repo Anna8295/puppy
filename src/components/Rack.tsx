@@ -265,7 +265,7 @@ export default function Rack() {
                 <span className="mt-1 font-mono text-xs uppercase tracking-[0.2em] text-caramel-600">{current.colour}</span>
               </>
             ) : (
-              <span className="font-mono text-xs uppercase tracking-[0.2em] text-coffee-800/60">
+              <span className="font-mono text-xs uppercase tracking-[0.2em] text-coffee-700">
                 <span className="scrub-hint-mouse">Hover to turn</span>
                 <span className="scrub-hint-touch">Tap to turn</span>
               </span>

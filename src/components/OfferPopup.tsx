@@ -124,12 +124,12 @@ export default function OfferPopup({ signedUp, onSignedUp }: OfferPopupProps) {
             />
             <button
               type="submit"
-              className="shrink-0 bg-caramel-500 px-4 py-1.5 font-mono text-xs uppercase tracking-[0.15em] text-sand-100 transition-colors hover:bg-caramel-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-coffee-950"
+              className="shrink-0 bg-caramel-600 px-4 py-1.5 font-mono text-xs uppercase tracking-[0.15em] text-sand-100 transition-colors hover:bg-coffee-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-coffee-950"
             >
               Get 15%
             </button>
           </form>
-          <p className="mt-2 font-body text-[0.7rem] text-coffee-800/70">
+          <p className="mt-2 font-body text-[0.7rem] text-coffee-700">
             Demo only: nothing is sent or stored, and there’s no real code.
           </p>
         </div>

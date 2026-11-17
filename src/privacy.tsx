@@ -98,7 +98,7 @@ function PrivacyPage() {
           </p>
         </Section>
 
-        <p className="mt-12 font-mono text-xs uppercase tracking-[0.2em] text-coffee-800/60">Last updated {UPDATED}</p>
+        <p className="mt-12 font-mono text-xs uppercase tracking-[0.2em] text-coffee-700">Last updated {UPDATED}</p>
       </main>
 
       <Footer />

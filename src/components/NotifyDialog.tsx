@@ -69,7 +69,7 @@ export default function NotifyDialog({ open, onClose }: NotifyDialogProps) {
             ref={primaryRef}
             type="button"
             onClick={onClose}
-            className="bg-caramel-500 px-6 py-2.5 font-mono text-xs uppercase tracking-[0.15em] text-sand-100 transition-colors hover:bg-caramel-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-coffee-950"
+            className="bg-caramel-600 px-6 py-2.5 font-mono text-xs uppercase tracking-[0.15em] text-sand-100 transition-colors hover:bg-coffee-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-coffee-950"
           >
             Fair enough
           </button>
