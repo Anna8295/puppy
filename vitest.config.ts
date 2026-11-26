@@ -4,12 +4,12 @@ import viteConfig from "./vite.config";
 // Component and unit tests run in jsdom (a simulated browser in Node).
 // End-to-end tests in e2e/ run in a real browser with Playwright instead.
 export default mergeConfig(
-  viteConfig,
+  viteConfig({ mode: "test", command: "serve" }),
   defineConfig({
     test: {
       environment: "jsdom",
       setupFiles: ["src/test/setup.ts"],
-      include: ["src/**/*.test.{ts,tsx}"],
+      include: ["src/**/*.test.{ts,tsx}", "worker/src/**/*.test.js"],
       restoreMocks: true,
       coverage: {
         provider: "v8",

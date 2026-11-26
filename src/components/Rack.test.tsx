@@ -1,6 +1,6 @@
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import { describe, expect, it } from "vitest";
+import { describe, expect, it, vi } from "vitest";
 import { GARMENTS } from "../wardrobe";
 import Rack from "./Rack";
 
@@ -54,5 +54,22 @@ describe("Rack", () => {
 
     expect(first).toHaveAttribute("aria-pressed", "false");
     expect(second).toHaveAttribute("aria-pressed", "true");
+  });
+
+  it("offers the fitting room for the piece that's open, when the try-on is set up", async () => {
+    vi.stubEnv("VITE_TRY_ON_URL", "https://try-on.example");
+    const user = userEvent.setup();
+    render(<Rack />);
+    await user.click(screen.getByRole("button", { name: /turn the rain slicker/i }));
+    await user.click(screen.getByRole("button", { name: "Try the Rain Slicker on your dog" }));
+
+    expect(screen.getByRole("dialog", { name: /try it on your dog/i })).toBeInTheDocument();
+    expect(screen.getByRole("radio", { name: "Rain Slicker, Mustard" })).toBeChecked();
+    vi.unstubAllEnvs();
+  });
+
+  it("hides the fitting room when the try-on isn't set up", () => {
+    render(<Rack />);
+    expect(screen.queryByRole("button", { name: /on your dog/i })).not.toBeInTheDocument();
   });
 });

@@ -1,0 +1,17 @@
+// Cloudflare Worker behind "Try it on your dog": takes the visitor's photo and
+// a garment id, and asks FLUX.2 [klein] on Workers AI (free plan) to dress the
+// dog. Deploy from this folder with: npx wrangler deploy
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "cord-and-coat-try-on",
+  "main": "src/index.js",
+  "compatibility_date": "2026-11-01",
+  "ai": { "binding": "AI" },
+  // daily counters: 40 try-ons for the whole site, 3 per visitor
+  "kv_namespaces": [{ "binding": "COUNTS", "id": "10ed04adf19d4d24b931a812c7d595ec" }],
+  // and no more than 2 a minute from one visitor (double clicks, scripts)
+  "ratelimits": [{ "name": "LIMITER", "namespace_id": "2001", "simple": { "limit": 2, "period": 60 } }],
+  // the garment reference photos in garments/ are bundled with the Worker
+  "rules": [{ "type": "Data", "globs": ["**/*.jpg"], "fallthrough": false }],
+  "observability": { "enabled": false }
+}

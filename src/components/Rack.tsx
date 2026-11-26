@@ -1,6 +1,8 @@
 import { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
 import { useFramePlayer } from "../hooks/useFramePlayer";
 import { GARMENTS, garmentFrameUrls, type Garment } from "../wardrobe";
+import { tryOnUrl } from "../tryOn";
+import TryOnDialog from "./TryOnDialog";
 
 // Slot widths as a fraction of the garment image width (--w).
 // Rest: everything side-on. Open: one piece faces front, the rest bunch up like curtains.
@@ -113,6 +115,7 @@ export default function Rack() {
   const swingEls = useRef<(HTMLDivElement | null)[]>([]);
   const [preload, setPreload] = useState(false);
   const [active, setActive] = useState<number | null>(null);
+  const [fitting, setFitting] = useState(false);
 
   // --- hover intent: avoids flicker while pieces slide under the cursor ---
   const hovered = useRef<number | null>(null);
@@ -210,69 +213,89 @@ export default function Rack() {
   const current = active === null ? null : GARMENTS[active];
 
   return (
-    <section
-      id="rail"
-      ref={sectionRef}
-      aria-labelledby="rail-title"
-      className="relative z-10 overflow-hidden rounded-t-[2rem] bg-bone-100 pb-24 pt-20 shadow-[0_-30px_60px_-30px_rgba(27,18,11,0.4)] md:rounded-t-[3rem] md:pb-32 md:pt-28"
-    >
-      <div className="mx-auto max-w-7xl px-4 sm:px-8 md:px-10">
-        <div className="max-w-2xl">
-          <p className="font-mono text-xs uppercase tracking-[0.2em] text-caramel-600 sm:text-sm">The first rail</p>
-          <h2
-            id="rail-title"
-            className="mt-3 font-display text-[clamp(2rem,1.3rem+3vw,4rem)] font-medium leading-[1.05] tracking-tight text-coffee-950"
-          >
-            Five pieces for <em className="italic">colder</em> walks.
-          </h2>
-          <p className="mt-4 max-w-lg font-body text-base leading-relaxed text-coffee-700 md:text-lg">
-            Knits, fleece and a proper raincoat, each cut to move with the dog wearing it.{" "}
-            <span className="scrub-hint-mouse">Hover over a piece to take it off the rail.</span>
-            <span className="scrub-hint-touch">Tap a piece to take it off the rail.</span>
-          </p>
-        </div>
+    <>
+      <section
+        id="rail"
+        ref={sectionRef}
+        aria-labelledby="rail-title"
+        className="relative z-10 overflow-hidden rounded-t-[2rem] bg-bone-100 pb-24 pt-20 shadow-[0_-30px_60px_-30px_rgba(27,18,11,0.4)] md:rounded-t-[3rem] md:pb-32 md:pt-28"
+      >
+        <div className="mx-auto max-w-7xl px-4 sm:px-8 md:px-10">
+          <div className="max-w-2xl">
+            <p className="font-mono text-xs uppercase tracking-[0.2em] text-caramel-600 sm:text-sm">The first rail</p>
+            <h2
+              id="rail-title"
+              className="mt-3 font-display text-[clamp(2rem,1.3rem+3vw,4rem)] font-medium leading-[1.05] tracking-tight text-coffee-950"
+            >
+              Five pieces for <em className="italic">colder</em> walks.
+            </h2>
+            <p className="mt-4 max-w-lg font-body text-base leading-relaxed text-coffee-700 md:text-lg">
+              Knits, fleece and a proper raincoat, each cut to move with the dog wearing it.{" "}
+              <span className="scrub-hint-mouse">Hover over a piece to take it off the rail.</span>
+              <span className="scrub-hint-touch">Tap a piece to take it off the rail.</span>
+            </p>
+          </div>
 
-        <div className="relative mt-14 md:mt-20">
-          {/* the rail itself, with wall brackets at each end */}
-          <div aria-hidden className="absolute inset-x-0 top-0 h-3 rounded-full bg-gradient-to-b from-caramel-300 via-caramel-500 to-coffee-800 shadow-[0_6px_10px_-4px_rgba(27,18,11,0.45)]" />
-          <div aria-hidden className="absolute -top-3 left-3 hidden h-7 w-2 rounded-sm bg-coffee-800 sm:block" />
-          <div aria-hidden className="absolute -top-3 right-3 hidden h-7 w-2 rounded-sm bg-coffee-800 sm:block" />
+          <div className="relative mt-14 md:mt-20">
+            {/* the rail itself, with wall brackets at each end */}
+            <div aria-hidden className="absolute inset-x-0 top-0 h-3 rounded-full bg-gradient-to-b from-caramel-300 via-caramel-500 to-coffee-800 shadow-[0_6px_10px_-4px_rgba(27,18,11,0.45)]" />
+            <div aria-hidden className="absolute -top-3 left-3 hidden h-7 w-2 rounded-sm bg-coffee-800 sm:block" />
+            <div aria-hidden className="absolute -top-3 right-3 hidden h-7 w-2 rounded-sm bg-coffee-800 sm:block" />
 
-          <ul
-            ref={railRef}
-            onPointerLeave={(event) => event.pointerType === "mouse" && handleHover(null)}
-            className="relative -mt-0.5 flex justify-center [--c0:0.36] [--c1:0.21] [--w:200px] sm:[--c0:0.4] sm:[--c1:0.3] sm:[--w:270px] lg:[--w:340px]"
-          >
-            {GARMENTS.map((garment, i) => (
-              <Hanger
-                key={garment.id}
-                garment={garment}
-                index={i}
-                open={active === i}
-                slot={active === null ? SLOT.rest : active === i ? SLOT.open : SLOT.bunched}
-                preload={preload}
-                swingRef={(el) => (swingEls.current[i] = el)}
-                onHover={handleHover}
-                onToggle={handleToggle}
-              />
-            ))}
-          </ul>
+            <ul
+              ref={railRef}
+              onPointerLeave={(event) => event.pointerType === "mouse" && handleHover(null)}
+              className="relative -mt-0.5 flex justify-center [--c0:0.36] [--c1:0.21] [--w:200px] sm:[--c0:0.4] sm:[--c1:0.3] sm:[--w:270px] lg:[--w:340px]"
+            >
+              {GARMENTS.map((garment, i) => (
+                <Hanger
+                  key={garment.id}
+                  garment={garment}
+                  index={i}
+                  open={active === i}
+                  slot={active === null ? SLOT.rest : active === i ? SLOT.open : SLOT.bunched}
+                  preload={preload}
+                  swingRef={(el) => (swingEls.current[i] = el)}
+                  onHover={handleHover}
+                  onToggle={handleToggle}
+                />
+              ))}
+            </ul>
 
-          <p aria-live="polite" className="mt-8 flex min-h-[3.5rem] flex-col items-center text-center">
-            {current ? (
-              <>
-                <span className="font-display text-xl leading-tight text-coffee-950 md:text-2xl">{current.name}</span>
-                <span className="mt-1 font-mono text-xs uppercase tracking-[0.2em] text-caramel-600">{current.colour}</span>
-              </>
-            ) : (
-              <span className="font-mono text-xs uppercase tracking-[0.2em] text-coffee-700">
-                <span className="scrub-hint-mouse">Hover to turn</span>
-                <span className="scrub-hint-touch">Tap to turn</span>
-              </span>
+            <p aria-live="polite" className="mt-8 flex min-h-[3.5rem] flex-col items-center text-center">
+              {current ? (
+                <>
+                  <span className="font-display text-xl leading-tight text-coffee-950 md:text-2xl">{current.name}</span>
+                  <span className="mt-1 font-mono text-xs uppercase tracking-[0.2em] text-caramel-600">{current.colour}</span>
+                </>
+              ) : (
+                <span className="font-mono text-xs uppercase tracking-[0.2em] text-coffee-700">
+                  <span className="scrub-hint-mouse">Hover to turn</span>
+                  <span className="scrub-hint-touch">Tap to turn</span>
+                </span>
+              )}
+            </p>
+
+            {tryOnUrl() && (
+              <div className="mt-6 flex justify-center">
+                <button
+                  type="button"
+                  onClick={() => setFitting(true)}
+                  className="inline-flex items-center gap-2.5 rounded-full bg-coffee-950 px-6 py-3 font-mono text-xs uppercase tracking-[0.15em] text-sand-100 shadow-[0_14px_30px_-14px_rgba(27,18,11,0.7)] transition-colors hover:bg-caramel-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-caramel-600"
+                >
+                  <svg aria-hidden viewBox="0 0 24 24" className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth={1.8} strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M4 8.5A2.5 2.5 0 0 1 6.5 6h1.2l1.3-2h6l1.3 2h1.2A2.5 2.5 0 0 1 20 8.5v8a2.5 2.5 0 0 1-2.5 2.5h-11A2.5 2.5 0 0 1 4 16.5z" />
+                    <circle cx="12" cy="12.5" r="3.5" />
+                  </svg>
+                  {current ? `Try the ${current.name} on your dog` : "Try it on your dog"}
+                </button>
+              </div>
             )}
-          </p>
+          </div>
         </div>
-      </div>
-    </section>
+      </section>
+      {/* outside the section, so the rail's caption stays its only live region */}
+      {tryOnUrl() && <TryOnDialog open={fitting} onClose={() => setFitting(false)} garmentId={current?.id} />}
+    </>
   );
 }

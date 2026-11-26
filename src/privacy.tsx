@@ -5,14 +5,14 @@ import "./index.css";
 import Footer from "./components/Footer";
 
 const HOME = import.meta.env.BASE_URL;
-const UPDATED = "13 November 2026";
+const UPDATED = "26 November 2026";
 
 const LINK =
   "underline decoration-caramel-500/50 underline-offset-4 transition-colors hover:text-caramel-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-caramel-600";
 
-function Section({ title, children }: { title: string; children: ReactNode }) {
+function Section({ title, id, children }: { title: string; id?: string; children: ReactNode }) {
   return (
-    <section className="mt-12">
+    <section id={id} className="mt-12 scroll-mt-8">
       <h2 className="font-display text-2xl font-medium tracking-tight text-coffee-950 md:text-3xl">{title}</h2>
       <div className="mt-4 space-y-4">{children}</div>
     </section>
@@ -55,7 +55,10 @@ function PrivacyPage() {
           <ul className="list-disc space-y-2 pl-5 marker:text-caramel-500">
             <li>No cookies.</li>
             <li>No analytics, tracking pixels or advertising.</li>
-            <li>No third-party services: fonts and images are served from this site, not from Google or anyone else.</li>
+            <li>
+              No third-party services while you browse: fonts and images are served from this site, not from Google or
+              anyone else. The only exception is the fitting room, and only when you use it (see below).
+            </li>
             <li>Nothing is saved in your browser’s storage.</li>
           </ul>
         </Section>
@@ -66,6 +69,26 @@ function PrivacyPage() {
             checked in your browser, cleared, and a message explains that no email or discount code will ever be sent.
             The address is never sent to a server and never stored.
           </p>
+        </Section>
+
+        <Section title="The fitting room (“Try it on your dog”)" id="try-on">
+          <p>
+            When you add a photo, your browser makes it smaller and redraws it, which removes the location and camera
+            details phones save inside photos. The photo is only sent when you press “Dress my dog”: then it goes,
+            with the piece you picked, to Cloudflare Workers AI (Cloudflare, Inc., United States), which makes the
+            picture and sends it straight back to your browser.
+          </p>
+          <p>
+            Neither this site nor its Cloudflare Worker keeps your photo or the picture. To allow three try-ons per
+            visitor a day, the Worker keeps a counter under a scrambled code made from your IP address and the date,
+            not the address itself. Counters delete themselves after two days. Like any web service, Cloudflare
+            receives your IP address and the technical details of the request; see the{" "}
+            <a className={LINK} href="https://www.cloudflare.com/privacypolicy/" target="_blank" rel="noopener noreferrer">
+              Cloudflare Privacy Policy
+            </a>
+            .
+          </p>
+          <p>Please only use photos of dogs, with no people in them. The pictures are made by AI and can be wrong.</p>
         </Section>
 
         <Section title="Hosting">
